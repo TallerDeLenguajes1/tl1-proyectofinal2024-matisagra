@@ -12,3 +12,4 @@ C:\Users\WINDOWS\Desktop\proyecto-taller1\tl1-proyectofinal2024-matisagra\obj\De
 C:\Users\WINDOWS\Desktop\proyecto-taller1\tl1-proyectofinal2024-matisagra\obj\Debug\net8.0\tl1-proyectofinal2024-matisagra.pdb
 C:\Users\WINDOWS\Desktop\proyecto-taller1\tl1-proyectofinal2024-matisagra\obj\Debug\net8.0\tl1-proyectofinal2024-matisagra.genruntimeconfig.cache
 C:\Users\WINDOWS\Desktop\proyecto-taller1\tl1-proyectofinal2024-matisagra\obj\Debug\net8.0\ref\tl1-proyectofinal2024-matisagra.dll
+C:\Users\WINDOWS\Desktop\proyecto-taller1\tl1-proyectofinal2024-matisagra\obj\Debug\net8.0\tl1-proyectofinal2024-matisagra.sourcelink.json
