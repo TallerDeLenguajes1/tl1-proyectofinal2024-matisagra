@@ -10,8 +10,16 @@ namespace PersonajesJson
         // Método para guardar una lista de personajes en un archivo JSON
         public static void GuardarPersonajes(List<Personaje> personajes, string nombreArchivo)
         {
-            string json = JsonSerializer.Serialize(personajes);
-            File.WriteAllText(nombreArchivo, json);
+            if (personajes.Count == 0)
+            {
+                string jsonVacio = ""; // o "{}" si es un objeto JSON vacío
+                File.WriteAllText(nombreArchivo, jsonVacio);
+            }
+            else
+            {
+                string json = JsonSerializer.Serialize(personajes);
+                File.WriteAllText(nombreArchivo, json);
+            }
         }
 
         // Método para leer una lista de personajes desde un archivo JSON

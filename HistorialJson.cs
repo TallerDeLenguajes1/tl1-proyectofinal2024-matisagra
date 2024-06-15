@@ -5,43 +5,39 @@ using System.Text.Json;
 using FabricaDePersonajes;
 
 
-namespace HistorialJson{
-    public class HistorialJson{
-        public static void GuardarGanador(List<Personaje> personajes, string nombreArchivo)
+namespace HistorialJson
+{
+    public class HistorialJson
+    {
+
+         public static void GuardarGanador(Personaje personajes, string nombreArchivo)
         {
-            string json = JsonSerializer.Serialize(personajes);
-            File.WriteAllText(nombreArchivo, json);
-            Console.WriteLine($"Se han guardado {personajes.Count} personajes en '{nombreArchivo}'.");
+                string json = JsonSerializer.Serialize(personajes);
+                File.WriteAllText(nombreArchivo, json);
+            
         }
 
         // Método para leer una lista de personajes desde un archivo JSON
-        public static List<Personaje> LeerPersonajes(string nombreArchivo)
+        public static List<Personaje> LeerGanadores(string nombreArchivo)
         {
-            List<Personaje> personajes = new List<Personaje>();
             if (File.Exists(nombreArchivo))
             {
                 string json = File.ReadAllText(nombreArchivo);
-                personajes = JsonSerializer.Deserialize<List<Personaje>>(json);
-                Console.WriteLine($"Se han leído {personajes.Count} personajes desde '{nombreArchivo}'.");
+                return JsonSerializer.Deserialize<List<Personaje>>(json);
             }
-            else
-            {
-                Console.WriteLine($"El archivo '{nombreArchivo}' no existe.");
-            }
-            return personajes;
+            return new List<Personaje>();
         }
 
+        // Método para verificar si un archivo JSON existe y tiene datos
         public static bool Existe(string nombreArchivo)
         {
             if (File.Exists(nombreArchivo))
             {
                 string json = File.ReadAllText(nombreArchivo);
-                return !string.IsNullOrWhiteSpace(json); // Devuelve true si hay contenido válido
+                return json.Length > 0;
             }
-            else
-            {
-                return false; // Devuelve false si el archivo no existe
-            }
+            return false;
         }
+
     }
 }
