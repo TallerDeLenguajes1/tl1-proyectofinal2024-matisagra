@@ -43,6 +43,7 @@ namespace FabricaDePersonajes
             personaje.Fuerza = random.Next(1, 11);
             personaje.Nivel = random.Next(1, 11);
             personaje.Armadura = random.Next(1, 11);
+            personaje.Salud = random.Next(1,101);
 
             return personaje;
 
