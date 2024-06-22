@@ -42,6 +42,8 @@ using Texto;
 
     static void Jugar()
     {
+        
+        
         Console.Clear();
         Texto.Texto.Presentacion();
 
@@ -71,7 +73,7 @@ using Texto;
         Personaje ganador = null;
         while (personajes.Count > 1)
         {
-            Console.Clear();
+           Console.Clear();
 
             if (ganador == null)
             {
@@ -86,7 +88,7 @@ using Texto;
                 ganador = personajes[indicePersonaje1];
             }
 
-            Console.Clear();
+           Console.Clear();
 
             Console.WriteLine($"\nPersonajes disponibles para combatir contra {ganador.Nombre}:");
             for (int i = 0; i < personajes.Count; i++)
@@ -108,7 +110,7 @@ using Texto;
             if (ganador.Salud <= 0)
             {
                 HistorialJson.HistorialJson.GuardarGanador(oponente,nombreArchivo2);
-                Texto.Texto.Perdiste();
+               Texto.Texto.Perdiste();
             }
 
             if (personajes.Count == 1)
@@ -129,7 +131,7 @@ using Texto;
 
     static void VerHistorialGanadores()
     {
-        Console.Clear();
+       Console.Clear();
         Console.WriteLine("HISTORIAL DE GANADORES:");
         List<Personaje> ganadores = HistorialJson.HistorialJson.LeerGanadores("ganadores.json");
         

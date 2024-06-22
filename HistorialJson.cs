@@ -10,11 +10,14 @@ namespace HistorialJson
     public class HistorialJson
     {
 
-         public static void GuardarGanador(Personaje personajes, string nombreArchivo)
+        public static void GuardarGanador(Personaje personaje, string nombreArchivo)
         {
-                string json = JsonSerializer.Serialize(personajes);
-                File.WriteAllText(nombreArchivo, json);
+            List<Personaje> ListaGanador = LeerGanadores(nombreArchivo);
             
+                ListaGanador.Add(personaje);
+                string json = JsonSerializer.Serialize(ListaGanador);
+                File.WriteAllText(nombreArchivo, json);
+
         }
 
         // Método para leer una lista de personajes desde un archivo JSON
@@ -23,7 +26,10 @@ namespace HistorialJson
             if (File.Exists(nombreArchivo))
             {
                 string json = File.ReadAllText(nombreArchivo);
-                return JsonSerializer.Deserialize<List<Personaje>>(json);
+                if (json != "")
+                {
+                    return JsonSerializer.Deserialize<List<Personaje>>(json);
+                }
             }
             return new List<Personaje>();
         }
