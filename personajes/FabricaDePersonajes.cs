@@ -1,11 +1,7 @@
-
 namespace FabricaDePersonajes
 {
-
-
     public class Personaje
     {
-
         // Caracteristicas
         public int Velocidad { get; set; }
         public int Destreza { get; set; }
@@ -21,21 +17,31 @@ namespace FabricaDePersonajes
         public DateTime FechaDeNacimiento { get; set; }
         public int Edad { get; set; }
 
+        // Listas para evitar duplicados
+        private static List<string> nombresUsados = new List<string>();
+        private static List<string> apodosUsados = new List<string>();
+
+        public static void ReiniciarListasUsadas()
+        {
+            nombresUsados.Clear();
+            apodosUsados.Clear();
+        }
+
+
         public static Personaje CrearPersonajeAleatorio()
         {
-
             Random random = new Random();
-            string[] tipos = { "Guerrero", "Berserker", "Explorador", "Jarl" };
-            string[] nombres = { "Ragnar", "Lagertha", "Bjorn", "Floki", "Rollo", "Ivar", "Ubbe", "Hvitserk" };
-            string[] apodos = { "El Valiente", "El Despiadado", "El Explorador", "El Conquistador", "El Sabio", "El Temible", "El Astuto", "El Fuerte" };
+             string[] tipos = { "Guerrero", "Berserker", "Explorador", "Jarl" };
+            string[] nombres = { "Ragnar", "Lagertha", "Bjorn", "Floki", "Rollo", "Ivar", "Ubbe", "Hvitserk", "Aslaug", "Sigurd", "Kjetill" };
+            string[] apodos = { "El Valiente", "El Despiadado", "El Explorador", "El Conquistador", "El Sabio", "El Temible", "El Astuto", "El Fuerte", "El Justo", "El Terrible" };
 
             DateTime fechaDeNacimiento = GenerarFechaDeNacimiento(random);
 
             Personaje personaje = new Personaje();
 
             personaje.Tipo = tipos[random.Next(tipos.Length)];
-            personaje.Nombre = nombres[random.Next(nombres.Length)];
-            personaje.Apodo = apodos[random.Next(apodos.Length)];
+            personaje.Nombre = GenerarNombreUnico(random, nombres);
+            personaje.Apodo = GenerarApodoUnico(random, apodos);
             personaje.FechaDeNacimiento = fechaDeNacimiento;
             personaje.Edad = CalcularEdad(fechaDeNacimiento);
             personaje.Velocidad = random.Next(1, 11);
@@ -43,11 +49,9 @@ namespace FabricaDePersonajes
             personaje.Fuerza = random.Next(1, 11);
             personaje.Nivel = random.Next(1, 11);
             personaje.Armadura = random.Next(1, 11);
-            personaje.Salud = random.Next(1,101);
+            personaje.Salud = random.Next(1, 101);
 
             return personaje;
-
-
         }
 
         private static DateTime GenerarFechaDeNacimiento(Random random)
@@ -62,8 +66,31 @@ namespace FabricaDePersonajes
         private static int CalcularEdad(DateTime fechaDeNacimiento)
         {
             int edad = DateTime.Now.Year - fechaDeNacimiento.Year;
-
             return edad;
+        }
+
+        private static string GenerarNombreUnico(Random random, string[] nombres)
+        {
+            string nombre;
+            do
+            {
+                nombre = nombres[random.Next(nombres.Length)];
+            } while (nombresUsados.Contains(nombre));
+
+            nombresUsados.Add(nombre);
+            return nombre;
+        }
+
+        private static string GenerarApodoUnico(Random random, string[] apodos)
+        {
+            string apodo;
+            do
+            {
+                apodo = apodos[random.Next(apodos.Length)];
+            } while (apodosUsados.Contains(apodo));
+
+            apodosUsados.Add(apodo);
+            return apodo;
         }
 
         public void MostrarPersonaje()
@@ -79,14 +106,6 @@ namespace FabricaDePersonajes
             Console.WriteLine($"Nivel: {Nivel}");
             Console.WriteLine($"Armadura: {Armadura}");
             Console.WriteLine($"Salud: {Salud}");
-
         }
-
-
-
     }
-
-
-
-
 }
