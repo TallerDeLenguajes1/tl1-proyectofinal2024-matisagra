@@ -66,7 +66,9 @@ public class Juego{
             Personaje oponente = personajes[indicePersonaje2];
 
             Console.WriteLine($"\nComienza la competencia entre {ganador.Nombre} y {oponente.Nombre}:");
-            Texto.Texto.AnimacionPelea(ganador.Nombre,oponente.Nombre);
+
+           // Texto.Texto.AnimacionPelea(ganador.Nombre,oponente.Nombre);
+
             Combate.Combate.Combatir(ganador, oponente, personajes);
 
             if (ganador.Salud <= 0)
