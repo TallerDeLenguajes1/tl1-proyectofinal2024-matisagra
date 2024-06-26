@@ -9,6 +9,9 @@ namespace FabricaDePersonajes
         public int Nivel { get; set; }
         public int Armadura { get; set; }
         public int Salud { get; set; }
+        public int SaludInicial{get; set;}
+
+        public int Habilidades{get; set;}
 
         // Datos
         public string Tipo { get; set; }
@@ -50,6 +53,8 @@ namespace FabricaDePersonajes
             personaje.Nivel = random.Next(1, 11);
             personaje.Armadura = random.Next(1, 11);
             personaje.Salud = 100;
+            personaje.SaludInicial = personaje.Salud;
+            personaje.Habilidades = personaje.Velocidad + personaje.Destreza + personaje.Fuerza + personaje.Nivel + personaje.Armadura;
 
             return personaje;
         }

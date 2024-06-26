@@ -110,6 +110,38 @@ namespace animaciones
             DibujarVikingo1();
             DibujarVikingo2();
         }
+
+        public void MoverVikingo1(){
+            for (int i = 0; i < 5; i++) // Mover 5 pasos adelante
+                {
+                    MoverVikingo1(2, 0);
+                    Thread.Sleep(100);
+                }
+                for (int i = 0; i < 5; i++) // Mover 5 pasos atrás
+                {
+                    MoverVikingo1(-2, 0);
+                    Thread.Sleep(100);
+                }
+
+                DibujarEscena();
+                Thread.Sleep(500); // Pausa para la animación
+        }
+
+        public void MoverVikingo2(){
+             for (int i = 0; i < 5; i++) // Mover 5 pasos adelante
+                {
+                    MoverVikingo2(-2, 0);
+                    Thread.Sleep(100);
+                }
+                for (int i = 0; i < 5; i++) // Mover 5 pasos atrás
+                {
+                    MoverVikingo2(2, 0);
+                    Thread.Sleep(100);
+                }
+
+                DibujarEscena();
+                Thread.Sleep(500); // Pausa para la animación
+        }
     }
 
 

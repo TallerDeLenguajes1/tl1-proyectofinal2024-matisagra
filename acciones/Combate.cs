@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using FabricaDePersonajes;
 
 namespace Combate
@@ -8,6 +9,10 @@ namespace Combate
     {
         public static void Combatir(Personaje personaje1, Personaje personaje2, List<Personaje> personajes)
         {
+            // Restaurar la salud inicial antes de comenzar el combate
+            personaje1.Salud = personaje1.SaludInicial;
+            personaje2.Salud = personaje2.SaludInicial;
+
             animaciones.AnimacionPelea animacion = new animaciones.AnimacionPelea(10, 9, 50, 9, personaje1.Nombre, personaje2.Nombre, personaje1.Salud, personaje2.Salud);
             Random random = new Random();
             bool sigueCombate = true;
@@ -21,22 +26,11 @@ namespace Combate
                 int danioCausado = CalcularDanioCausado(personaje1, personaje2, random);
                 personaje2.Salud -= danioCausado;
                 animacion.ActualizarSaludVikingo2(personaje2.Salud);
+                
                 Console.WriteLine($"{personaje1.Nombre} ataca a {personaje2.Nombre} y le causa {danioCausado} puntos de daño.");
 
                 // Mover vikingo1 hacia adelante y luego hacia atrás
-                for (int i = 0; i < 5; i++) // Mover 5 pasos adelante
-                {
-                    animacion.MoverVikingo1(2, 0);
-                    Thread.Sleep(100);
-                }
-                for (int i = 0; i < 5; i++) // Mover 5 pasos atrás
-                {
-                    animacion.MoverVikingo1(-2, 0);
-                    Thread.Sleep(100);
-                }
-
-                animacion.DibujarEscena();
-                Thread.Sleep(500); // Pausa para la animación
+                animacion.MoverVikingo1();
 
                 // Verificar si personaje2 ha sido derrotado
                 if (personaje2.Salud <= 0)
@@ -57,26 +51,12 @@ namespace Combate
                 Console.WriteLine($"{personaje2.Nombre} ataca a {personaje1.Nombre} y le causa {danioCausado} puntos de daño.");
 
                 // Mover vikingo2 hacia adelante y luego hacia atrás
-                for (int i = 0; i < 5; i++) // Mover 5 pasos adelante
-                {
-                    animacion.MoverVikingo2(-2, 0);
-                    Thread.Sleep(100);
-                }
-                for (int i = 0; i < 5; i++) // Mover 5 pasos atrás
-                {
-                    animacion.MoverVikingo2(2, 0);
-                    Thread.Sleep(100);
-                }
-
-                animacion.DibujarEscena();
-                Thread.Sleep(500); // Pausa para la animación
+                animacion.MoverVikingo2();
 
                 // Verificar si personaje1 ha sido derrotado
                 if (personaje1.Salud <= 0)
                 {
                     Console.WriteLine($"{personaje1.Nombre} ha sido derrotado.");
-                    MejorarPersonaje(personaje2);
-                    personajes.Clear();
                     sigueCombate = false;
                 }
 
@@ -106,6 +86,7 @@ namespace Combate
             if (random.Next(0, 2) == 0) // 50% de probabilidad de elegir entre salud o defensa
             {
                 ganador.Salud += 10; // Aumento de 10 en la salud
+                ganador.SaludInicial += 10; // Asegurarse de que la salud inicial también se incrementa
                 Console.WriteLine($"{ganador.Nombre} ha mejorado su salud en +10.");
             }
             else
