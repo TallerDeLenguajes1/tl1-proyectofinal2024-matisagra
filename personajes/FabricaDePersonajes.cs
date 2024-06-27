@@ -1,25 +1,11 @@
+using System;
+using System.Collections.Generic;
+using Personajes;
+
 namespace FabricaDePersonajes
 {
-    public class Personaje
+    public class Fabrica
     {
-        // Caracteristicas
-        public int Velocidad { get; set; }
-        public int Destreza { get; set; }
-        public int Fuerza { get; set; }
-        public int Nivel { get; set; }
-        public int Armadura { get; set; }
-        public int Salud { get; set; }
-        public int SaludInicial{get; set;}
-
-        public int Habilidades{get; set;}
-
-        // Datos
-        public string Tipo { get; set; }
-        public string Nombre { get; set; }
-        public string Apodo { get; set; }
-        public DateTime FechaDeNacimiento { get; set; }
-        public int Edad { get; set; }
-
         // Listas para evitar duplicados
         private static List<string> nombresUsados = new List<string>();
         private static List<string> apodosUsados = new List<string>();
@@ -30,31 +16,31 @@ namespace FabricaDePersonajes
             apodosUsados.Clear();
         }
 
-
         public static Personaje CrearPersonajeAleatorio()
         {
             Random random = new Random();
-             string[] tipos = { "Guerrero", "Berserker", "Explorador", "Jarl" };
+            string[] tipos = { "Guerrero", "Berserker", "Explorador", "Jarl" };
             string[] nombres = { "Ragnar", "Lagertha", "Bjorn", "Floki", "Rollo", "Ivar", "Ubbe", "Hvitserk", "Aslaug", "Sigurd", "Kjetill" };
             string[] apodos = { "El Valiente", "El Despiadado", "El Explorador", "El Conquistador", "El Sabio", "El Temible", "El Astuto", "El Fuerte", "El Justo", "El Terrible" };
 
             DateTime fechaDeNacimiento = GenerarFechaDeNacimiento(random);
 
-            Personaje personaje = new Personaje();
-
-            personaje.Tipo = tipos[random.Next(tipos.Length)];
-            personaje.Nombre = GenerarNombreUnico(random, nombres);
-            personaje.Apodo = GenerarApodoUnico(random, apodos);
-            personaje.FechaDeNacimiento = fechaDeNacimiento;
-            personaje.Edad = CalcularEdad(fechaDeNacimiento);
-            personaje.Velocidad = random.Next(1, 11);
-            personaje.Destreza = random.Next(1, 6);
-            personaje.Fuerza = random.Next(1, 11);
-            personaje.Nivel = random.Next(1, 11);
-            personaje.Armadura = random.Next(1, 11);
-            personaje.Salud = 100;
-            personaje.SaludInicial = personaje.Salud;
-            personaje.Habilidades = personaje.Velocidad + personaje.Destreza + personaje.Fuerza + personaje.Nivel + personaje.Armadura;
+            Personaje personaje = new Personaje
+            {
+                Tipo = tipos[random.Next(tipos.Length)],
+                Nombre = GenerarNombreUnico(random, nombres),
+                Apodo = GenerarApodoUnico(random, apodos),
+                FechaDeNacimiento = fechaDeNacimiento,
+                Edad = CalcularEdad(fechaDeNacimiento),
+                Velocidad = random.Next(1, 11),
+                Destreza = random.Next(1, 6),
+                Fuerza = random.Next(1, 11),
+                Nivel = random.Next(1, 11),
+                Armadura = random.Next(1, 11),
+                Salud = 100,
+                SaludInicial = 100,
+                Habilidades = random.Next(1, 11)
+            };
 
             return personaje;
         }
@@ -96,21 +82,6 @@ namespace FabricaDePersonajes
 
             apodosUsados.Add(apodo);
             return apodo;
-        }
-
-        public void MostrarPersonaje()
-        {
-            Console.WriteLine($"Tipo: {Tipo}");
-            Console.WriteLine($"Nombre: {Nombre}");
-            Console.WriteLine($"Apodo: {Apodo}");
-            Console.WriteLine($"Fecha de Nacimiento: {FechaDeNacimiento.ToShortDateString()}");
-            Console.WriteLine($"Edad: {Edad}");
-            Console.WriteLine($"Velocidad: {Velocidad}");
-            Console.WriteLine($"Destreza: {Destreza}");
-            Console.WriteLine($"Fuerza: {Fuerza}");
-            Console.WriteLine($"Nivel: {Nivel}");
-            Console.WriteLine($"Armadura: {Armadura}");
-            Console.WriteLine($"Salud: {Salud}");
         }
     }
 }

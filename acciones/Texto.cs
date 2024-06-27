@@ -50,6 +50,8 @@ namespace Texto
     |  |    |  `--'  | |  `--'  |       \    /\    /    |  | |  |\   | 
     |__|     \______/   \______/         \__/  \__/     |__| |__| \__| 
                                                                         ");
+            Console.WriteLine("\nPresiona Enter para volver al inicio...");
+            Console.ReadLine();
         }
 
         public static void Perdiste()
@@ -83,9 +85,9 @@ namespace Texto
         }
 
         public static void Pelea(string nombre1, string nombre2)
-{
-    Console.WriteLine($@"
-⠀⠀⠀⠀⣠⣶⣶⣤{nombre1}⠀⣠⣶⣶⣤⠀⠀⠀
+        {
+            Console.WriteLine($@"
+⠀⠀⠀⠀⣠⣶⣶⣤{nombre1}⠀   ⣠⣶⣶⣤⠀⠀⠀
 ⠀⠀⠀⠀⢿⣿⣿⣿⠀⠀⠀⢀⣀⣠⣤⣄⠀⢿⣿⣿⣿⠇⠀{nombre2}
 ⠀⠀⠀⠀⠈⣉⣩⣥⣶⣶⣟⣿⣿⠿⠿⠋⣀⣀⣉⣉⡁⠀⠀
 ⠀⠀⣠⣾⣿⣿⣿⣿⡟⠛⠋⠉⠀⣠⣴⣿⣿⣿⣿⣿⣿⣧⠀
@@ -98,7 +100,9 @@ namespace Texto
 ⣿⣿⠇⠀⠀⠀⣿⣿⡇⠀⠀⢸⣿⣿⠀⠀⠀⠘⣿⣿⡆⠀⠀
 ⠉⠉⠀⠀⠀⠀⠈⠉⠀⠀⠀⠀⠉⠉⠀⠀⠀⠀⠈⠉⠀⠀⠀
 ");
-}
+            Console.WriteLine("\nPresiona Enter para comenzar la batalla...");
+            Console.ReadLine();
+        }
 
 
         public static void Animado(int vel, string texto)
@@ -111,8 +115,23 @@ namespace Texto
             }
         }
 
+        public static async Task Chiste()
+        {
+            try
+            {
+                string joke = await Api.ChistesProgramadores.Chistes();
+                Console.WriteLine("Antes de derrotarte te contare un chiste que me enseño mi creador:");
+                Console.WriteLine(joke);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+            }
+        }
 
     }
+
+
 
 }
 
