@@ -87,7 +87,8 @@ namespace Texto
         public static void Pelea(string nombre1, string nombre2)
         {
             Console.WriteLine($@"
-⠀⠀⠀⠀⣠⣶⣶⣤{nombre1}⠀   ⣠⣶⣶⣤⠀⠀⠀
+ {nombre1}           
+⠀⠀⠀⠀⣠⣶⣶⣤⠀        ⣠⣶⣶⣤⠀⠀⠀
 ⠀⠀⠀⠀⢿⣿⣿⣿⠀⠀⠀⢀⣀⣠⣤⣄⠀⢿⣿⣿⣿⠇⠀{nombre2}
 ⠀⠀⠀⠀⠈⣉⣩⣥⣶⣶⣟⣿⣿⠿⠿⠋⣀⣀⣉⣉⡁⠀⠀
 ⠀⠀⣠⣾⣿⣿⣿⣿⡟⠛⠋⠉⠀⣠⣴⣿⣿⣿⣿⣿⣿⣧⠀

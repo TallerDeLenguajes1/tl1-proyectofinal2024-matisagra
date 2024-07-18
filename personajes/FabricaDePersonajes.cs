@@ -83,5 +83,15 @@ namespace FabricaDePersonajes
             apodosUsados.Add(apodo);
             return apodo;
         }
+
+        public static int CalcularDiferenciaHabilidades(Personaje p1, Personaje p2)
+        {
+            int diferencia = Math.Abs(p1.Velocidad - p2.Velocidad)
+                            + Math.Abs(p1.Destreza - p2.Destreza)
+                            + Math.Abs(p1.Fuerza - p2.Fuerza)
+                            + Math.Abs(p1.Nivel - p2.Nivel)
+                            + Math.Abs(p1.Armadura - p2.Armadura);
+            return diferencia;
+        }
     }
 }

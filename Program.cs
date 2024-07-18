@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using FabricaDePersonajes;
 using Personajes;
-
 class Program
 {
     static async Task Main()
@@ -98,10 +97,21 @@ class Program
             List<Personaje> posiblesOponentes = new List<Personaje>(personajes);
             posiblesOponentes.Remove(ganador);
 
-            // Selecciona un oponente aleatorio
-            int indiceOponente = random.Next(posiblesOponentes.Count);
-            Personaje oponente = posiblesOponentes[indiceOponente];
+            // Ordena los opnenentes para enfrentarme al mejor al final
+            Personaje oponente = null;
+            int menorDiferencia = int.MaxValue;
 
+            foreach (var posibleOponente in posiblesOponentes)
+            {
+                int diferencia = Fabrica.CalcularDiferenciaHabilidades(ganador, posibleOponente);
+                if (diferencia < menorDiferencia)
+                {
+                    menorDiferencia = diferencia;
+                    oponente = posibleOponente;
+                }
+            }
+
+            // API
             await Texto.Texto.Chiste();
 
 

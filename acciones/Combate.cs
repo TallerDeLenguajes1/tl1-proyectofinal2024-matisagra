@@ -8,7 +8,7 @@ namespace Combate
 {
     public class Combate
     {
-        public static async void Combatir(Personaje personaje1, Personaje personaje2, List<Personaje> personajes)
+        public static void Combatir(Personaje personaje1, Personaje personaje2, List<Personaje> personajes)
         {
             // Restaurar la salud inicial antes de comenzar el combate
             personaje1.Salud = personaje1.SaludInicial;
@@ -21,7 +21,7 @@ namespace Combate
 
             while (sigueCombate)
             {
-                
+
                 // Dibuja la escena de la pelea
                 animacion.DibujarEscena();
                 Thread.Sleep(500); // Pausa para la animación
@@ -30,7 +30,7 @@ namespace Combate
                 int danioCausado = CalcularDanioCausado(personaje1, personaje2, random);
                 personaje2.Salud -= danioCausado;
                 animacion.ActualizarSaludVikingo2(personaje2.Salud);
-                
+
                 Console.WriteLine($"{personaje1.Nombre} ataca a {personaje2.Nombre} y le causa {danioCausado} puntos de daño.");
 
                 // Mover vikingo1 hacia adelante y luego hacia atrás
@@ -86,17 +86,29 @@ namespace Combate
         static void MejorarPersonaje(Personaje ganador)
         {
             Random random = new Random();
-            // Asumimos que el ganador recibe un aumento en la salud o defensa
-            if (random.Next(0, 2) == 0) // 50% de probabilidad de elegir entre salud o defensa
+            int mejora = random.Next(0, 3); // Genera un número aleatorio entre 0 y 5 para decidir la mejora
+
+            switch (mejora)
             {
-                ganador.Salud += 10; // Aumento de 10 en la salud
-                ganador.SaludInicial += 10; // Asegurarse de que la salud inicial también se incrementa
-                Console.WriteLine($"{ganador.Nombre} ha mejorado su salud en +10.");
-            }
-            else
-            {
-                ganador.Armadura += 5; // Aumento de 5 en la armadura (defensa)
-                Console.WriteLine($"{ganador.Nombre} ha mejorado su defensa en +5.");
+                case 0:
+                    ganador.Salud += 10;
+                    ganador.SaludInicial += 10;
+                    Console.WriteLine($"{ganador.Nombre} ha mejorado su salud en +10.");
+                    ganador.Fuerza += 1;
+                    Console.WriteLine($"{ganador.Nombre} ha mejorado su fuerza en +3.");
+                    break;
+                case 1:
+                    ganador.Armadura += 5;
+                    Console.WriteLine($"{ganador.Nombre} ha mejorado su defensa en +5.");
+                    ganador.Velocidad += 3;
+                    Console.WriteLine($"{ganador.Nombre} ha mejorado su velocidad en +1.");
+                    break;
+                case 2:
+                    ganador.Destreza += 3;
+                    Console.WriteLine($"{ganador.Nombre} ha mejorado su destreza en +1.");
+                    ganador.Nivel += 1;
+                    Console.WriteLine($"{ganador.Nombre} ha subido de nivel a {ganador.Nivel}.");
+                    break;
             }
         }
     }
