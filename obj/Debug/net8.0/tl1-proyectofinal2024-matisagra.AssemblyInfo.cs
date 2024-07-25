@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("tl1-proyectofinal2024-matisagra")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fad85020ec4e11444dda83e6114dbc2cba06c4b5")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+26eafa47e5484f4d516f8b4d848d3d1979c80096")]
 [assembly: System.Reflection.AssemblyProductAttribute("tl1-proyectofinal2024-matisagra")]
 [assembly: System.Reflection.AssemblyTitleAttribute("tl1-proyectofinal2024-matisagra")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

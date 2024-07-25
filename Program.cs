@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
+using System.Threading.Tasks;
 using FabricaDePersonajes;
 using Personajes;
+
 class Program
 {
     static async Task Main()
     {
-
         do
         {
             // Limpia la consola al inicio de cada ciclo de juego
@@ -23,6 +25,10 @@ class Program
                     // Llama a la función Jugar si se selecciona la opción 1
                     await Jugar();
                     break;
+                case "2":
+                    // Llama a la función VerHistorial si se selecciona la opción 2
+                    VerHistorial();
+                    break;
                 case "S":
                     // Sale del juego si se ingresa "S"
                     return;
@@ -34,7 +40,6 @@ class Program
             }
         } while (true); // Repite el ciclo mientras la condición sea verdadera (bucle infinito)
     }
-
 
     static async Task Jugar()
     {
@@ -72,7 +77,7 @@ class Program
             PersonajesJson.PersonajesJson.GuardarPersonajes(personajes, nombreArchivoPersonajes);
         }
 
-        Personaje ganador = null;
+        Personaje elegido = null;
         Random random = new Random();
 
         Console.Clear();
@@ -87,7 +92,7 @@ class Program
         // Pide al usuario que elija un personaje
         Console.Write("\nElija el número de su personaje: ");
         int indicePersonaje1 = int.Parse(Console.ReadLine()) - 1;
-        ganador = personajes[indicePersonaje1];
+        elegido = personajes[indicePersonaje1];
 
         while (personajes.Count > 1)
         {
@@ -95,40 +100,53 @@ class Program
 
             // Crea una lista de posibles oponentes excluyendo al ganador actual
             List<Personaje> posiblesOponentes = new List<Personaje>(personajes);
-            posiblesOponentes.Remove(ganador);
+            posiblesOponentes.Remove(elegido);
 
-            // Ordena los opnenentes para enfrentarme al mejor al final
+            Console.WriteLine("\nTus oponentes seran:");
+            for (int i = 0; i < posiblesOponentes.Count; i++)
+            {
+                Console.WriteLine($"{posiblesOponentes[i].Nombre} ({posiblesOponentes[i].Tipo})");
+            }
+            Console.WriteLine("\nPresiona Enter para continuar...");
+            Console.ReadLine();
+
+            // Ordena los opnonentes para enfrentarme al mejor al final
             Personaje oponente = null;
             int menorDiferencia = int.MaxValue;
 
             foreach (var posibleOponente in posiblesOponentes)
             {
-                int diferencia = Fabrica.CalcularDiferenciaHabilidades(ganador, posibleOponente);
+                int diferencia = Fabrica.CalcularDiferenciaHabilidades(elegido, posibleOponente);
                 if (diferencia < menorDiferencia)
                 {
                     menorDiferencia = diferencia;
                     oponente = posibleOponente;
                 }
             }
-
+            
+            Console.Clear();
+            Console.WriteLine($"Ahora te vas a enfrentar a {oponente.Nombre}");
+            Texto.Texto.Pelea(elegido.Nombre, oponente.Nombre);
             // API
             await Texto.Texto.Chiste();
 
 
             // Muestra el inicio de la batalla
-            Console.WriteLine($"\nJAJA! Ahora si, comienza la batalla entre {ganador.Nombre} y {oponente.Nombre}:");
-            Texto.Texto.Pelea(ganador.Nombre, oponente.Nombre);
+            Console.WriteLine($"\nJAJA! Ahora si, comienza la batalla entre {elegido.Nombre} y {oponente.Nombre}:");
+
+            Console.WriteLine("\nPresiona Enter para comenzar la batalla...");
+            Console.ReadLine();
+
 
             // Realiza el combate entre el ganador y el oponente
-            Combate.Combate.Combatir(ganador, oponente, personajes);
+            Combate.Combate.Combatir(elegido, oponente, personajes);
 
             // Verifica el resultado del combate
-            if (ganador.Salud <= 0)
+            if (elegido.Salud <= 0)
             {
-                // Si el ganador actual pierde, guarda al oponente como ganador y finaliza el juego
-                HistorialJson.HistorialJson.GuardarGanador(oponente, nombreArchivoGanadores);
+                Console.Clear();
                 Texto.Texto.Perdiste();
-                ganador = null;
+                elegido = null;
                 personajes.Clear(); // Limpia la lista de personajes al perder
                 PersonajesJson.PersonajesJson.GuardarPersonajes(personajes, nombreArchivoPersonajes);
                 break;
@@ -137,7 +155,7 @@ class Program
             {
                 // Si el oponente pierde, lo elimina de la lista y continúa
                 personajes.Remove(oponente);
-                Console.WriteLine($"\n{ganador.Nombre} ha ganado la batalla.");
+                Console.WriteLine($"\n{elegido.Nombre} ha ganado la batalla.");
                 if (personajes.Count > 1)
                 {
                     Console.WriteLine("\nPresiona Enter para la siguiente ronda...");
@@ -148,8 +166,13 @@ class Program
             // Verifica si solo queda un personaje en la lista
             if (personajes.Count == 1)
             {
+                Console.Clear();
                 Texto.Texto.Ganaste();
-                HistorialJson.HistorialJson.GuardarGanador(ganador, nombreArchivoGanadores);
+                Console.WriteLine("Ingresa tu nombre para el historial de ganadores: ");
+                string usado = elegido.Nombre;
+                string nombre = Console.ReadLine();
+                elegido.Nombre = nombre + " con el guerrero " + usado;
+                HistorialJson.HistorialJson.GuardarGanador(elegido, nombreArchivoGanadores);
                 personajes.Clear(); // Limpia la lista de personajes al ganar
             }
 
@@ -158,6 +181,35 @@ class Program
         }
     }
 
+    static void VerHistorial()
+    {
+        Console.Clear();
+        // Define la ruta del archivo JSON de ganadores
+        string nombreArchivoGanadores = "ganadores/ganadores.json";
 
+        // Verifica si el archivo de ganadores existe
+        bool archivoExiste = HistorialJson.HistorialJson.Existe(nombreArchivoGanadores);
 
+        if (archivoExiste)
+        {
+            // Lee los ganadores del archivo JSON si este existe
+            List<Personaje> ganadores = HistorialJson.HistorialJson.LeerGanadores(nombreArchivoGanadores);
+
+            // Muestra la lista de ganadores
+            Console.WriteLine("\nHistorial de ganadores:");
+            foreach (var ganador in ganadores)
+            {
+                Console.WriteLine($"{ganador.Nombre}");
+            }
+        }
+        else
+        {
+            // Muestra un mensaje si no hay historial de ganadores
+            Console.WriteLine("No hay historial de ganadores.");
+        }
+
+        // Espera a que el usuario presione Enter para volver al menú
+        Console.WriteLine("\nPresiona Enter para volver al menú...");
+        Console.ReadLine();
+    }
 }
