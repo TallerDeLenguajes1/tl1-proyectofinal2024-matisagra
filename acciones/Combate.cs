@@ -78,38 +78,46 @@ namespace Combate
 
             // Calcular daño
             int danio = ((ataque * efectividad) - defensa) / constanteAjuste;
-
+            int danioFinal = danio*2;
             // Asegurarse de que el daño no sea menor que 10
-            return Math.Max(danio, 10);
+            return danioFinal;
         }
 
         static void MejorarPersonaje(Personaje ganador)
         {
-            Random random = new Random();
-            int mejora = random.Next(0, 3); // Genera un número aleatorio entre 0 y 5 para decidir la mejora
+            int puntosDeMejora = 10;
+            int puntosAsignadosASalud = 0;
+            int puntosAsignadosADefensa = 0;
 
-            switch (mejora)
+            Console.WriteLine($"{ganador.Nombre} ha ganado y tiene {puntosDeMejora} puntos de mejora para asignar.");
+            
+            // Asignar puntos a la salud
+            Console.WriteLine("¿Cuántos puntos quieres asignar a la salud?");
+            while (true)
             {
-                case 0:
-                    ganador.Salud += 10;
-                    ganador.SaludInicial += 10;
-                    Console.WriteLine($"{ganador.Nombre} ha mejorado su salud en +10.");
-                    ganador.Fuerza += 1;
-                    Console.WriteLine($"{ganador.Nombre} ha mejorado su fuerza en +3.");
+                if (int.TryParse(Console.ReadLine(), out puntosAsignadosASalud) &&
+                    puntosAsignadosASalud >= 0 &&
+                    puntosAsignadosASalud <= puntosDeMejora)
+                {
                     break;
-                case 1:
-                    ganador.Armadura += 5;
-                    Console.WriteLine($"{ganador.Nombre} ha mejorado su defensa en +5.");
-                    ganador.Velocidad += 3;
-                    Console.WriteLine($"{ganador.Nombre} ha mejorado su velocidad en +1.");
-                    break;
-                case 2:
-                    ganador.Destreza += 3;
-                    Console.WriteLine($"{ganador.Nombre} ha mejorado su destreza en +1.");
-                    ganador.Nivel += 1;
-                    Console.WriteLine($"{ganador.Nombre} ha subido de nivel a {ganador.Nivel}.");
-                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Entrada no válida. Por favor, ingresa un número entre 0 y 10.");
+                }
             }
+
+            // Calcular los puntos restantes para la defensa
+            puntosAsignadosADefensa = puntosDeMejora - puntosAsignadosASalud;
+
+            // Mejorar las estadísticas del personaje
+            ganador.Salud += puntosAsignadosASalud;
+            ganador.SaludInicial += puntosAsignadosASalud;
+            ganador.Armadura += puntosAsignadosADefensa;
+
+            Console.WriteLine($"{ganador.Nombre} ha mejorado su salud en +{puntosAsignadosASalud}.");
+            Console.WriteLine($"{ganador.Nombre} ha mejorado su defensa en +{puntosAsignadosADefensa}.");
         }
+
     }
 }

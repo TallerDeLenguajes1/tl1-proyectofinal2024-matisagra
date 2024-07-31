@@ -45,27 +45,25 @@ namespace animaciones
         public void DibujarVikingo1()
         {
             Console.SetCursorPosition(posicion1X, posicion1Y);
-            Console.WriteLine("  O  ");
+            Console.WriteLine(" ( •_•) ");
             Console.SetCursorPosition(posicion1X, posicion1Y + 1);
-            Console.WriteLine(" /|\\ ");
+            Console.WriteLine(" ( ง )ง ");
             Console.SetCursorPosition(posicion1X, posicion1Y + 2);
-            Console.WriteLine(" / \\ ");
-            Console.SetCursorPosition(posicion1X, posicion1Y + 3);
-            Console.WriteLine("/   \\");
+            Console.WriteLine(" /︶\\ ");
         }
+
 
         // Dibuja el segundo vikingo en la posición asignada
         public void DibujarVikingo2()
         {
             Console.SetCursorPosition(posicion2X, posicion2Y);
-            Console.WriteLine("  O  ");
+            Console.WriteLine(" (•_• ) ");
             Console.SetCursorPosition(posicion2X, posicion2Y + 1);
-            Console.WriteLine(" \\|/ ");
+            Console.WriteLine(" ୧( ୧ ) ");
             Console.SetCursorPosition(posicion2X, posicion2Y + 2);
-            Console.WriteLine(" / \\ ");
-            Console.SetCursorPosition(posicion2X, posicion2Y + 3);
-            Console.WriteLine("/   \\");
+            Console.WriteLine("   /︶\\ ");
         }
+
 
         // Dibuja la información de los personajes en la parte superior de la consola
         public void DibujarInfoPersonajes()

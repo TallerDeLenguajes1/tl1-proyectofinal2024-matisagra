@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\WINDOWS\\Desktop\\proyecto-taller1\\tl1-proyectofinal2024-matisagra\\tl1-proyectofinal2024-matisagra.csproj": {}
+    "C:\\Users\\Estudiante\\Desktop\\proyecto-taller\\tl1-proyectofinal2024-matisagra\\tl1-proyectofinal2024-matisagra.csproj": {}
   },
   "projects": {
-    "C:\\Users\\WINDOWS\\Desktop\\proyecto-taller1\\tl1-proyectofinal2024-matisagra\\tl1-proyectofinal2024-matisagra.csproj": {
+    "C:\\Users\\Estudiante\\Desktop\\proyecto-taller\\tl1-proyectofinal2024-matisagra\\tl1-proyectofinal2024-matisagra.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\WINDOWS\\Desktop\\proyecto-taller1\\tl1-proyectofinal2024-matisagra\\tl1-proyectofinal2024-matisagra.csproj",
+        "projectUniqueName": "C:\\Users\\Estudiante\\Desktop\\proyecto-taller\\tl1-proyectofinal2024-matisagra\\tl1-proyectofinal2024-matisagra.csproj",
         "projectName": "tl1-proyectofinal2024-matisagra",
-        "projectPath": "C:\\Users\\WINDOWS\\Desktop\\proyecto-taller1\\tl1-proyectofinal2024-matisagra\\tl1-proyectofinal2024-matisagra.csproj",
-        "packagesPath": "C:\\Users\\WINDOWS\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\WINDOWS\\Desktop\\proyecto-taller1\\tl1-proyectofinal2024-matisagra\\obj\\",
+        "projectPath": "C:\\Users\\Estudiante\\Desktop\\proyecto-taller\\tl1-proyectofinal2024-matisagra\\tl1-proyectofinal2024-matisagra.csproj",
+        "packagesPath": "C:\\Users\\Estudiante\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Estudiante\\Desktop\\proyecto-taller\\tl1-proyectofinal2024-matisagra\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\WINDOWS\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\Estudiante\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -58,7 +58,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

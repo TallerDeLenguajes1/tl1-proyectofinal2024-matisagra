@@ -102,7 +102,7 @@ class Program
             List<Personaje> posiblesOponentes = new List<Personaje>(personajes);
             posiblesOponentes.Remove(elegido);
 
-            Console.WriteLine("\nTus oponentes seran:");
+            Console.WriteLine("\nGuerreros en batalla:");
             for (int i = 0; i < posiblesOponentes.Count; i++)
             {
                 Console.WriteLine($"{posiblesOponentes[i].Nombre} ({posiblesOponentes[i].Tipo})");
@@ -155,7 +155,6 @@ class Program
             {
                 // Si el oponente pierde, lo elimina de la lista y continúa
                 personajes.Remove(oponente);
-                Console.WriteLine($"\n{elegido.Nombre} ha ganado la batalla.");
                 if (personajes.Count > 1)
                 {
                     Console.WriteLine("\nPresiona Enter para la siguiente ronda...");
@@ -174,6 +173,8 @@ class Program
                 elegido.Nombre = nombre + " con el guerrero " + usado;
                 HistorialJson.HistorialJson.GuardarGanador(elegido, nombreArchivoGanadores);
                 personajes.Clear(); // Limpia la lista de personajes al ganar
+                Console.WriteLine("\nPresiona Enter para volver al inicio...");
+                Console.ReadLine();
             }
 
             // Guarda el estado actual de los personajes en el archivo JSON
