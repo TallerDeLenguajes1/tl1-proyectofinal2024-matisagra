@@ -44,25 +44,45 @@ namespace animaciones
         // Dibuja el primer vikingo en la posición asignada
         public void DibujarVikingo1()
         {
+            // Guardar el color original
+            ConsoleColor colorOriginal = Console.ForegroundColor;
+
+            // Cambiar el color a rojo
+            Console.ForegroundColor = ConsoleColor.Red;
+
+            // Dibujar el primer vikingo en la posición asignada
             Console.SetCursorPosition(posicion1X, posicion1Y);
             Console.WriteLine(" ( •_•) ");
             Console.SetCursorPosition(posicion1X, posicion1Y + 1);
             Console.WriteLine(" ( ง )ง ");
             Console.SetCursorPosition(posicion1X, posicion1Y + 2);
             Console.WriteLine(" /︶\\ ");
-        }
 
+            // Restaurar el color original
+            Console.ForegroundColor = colorOriginal;
+        }
 
         // Dibuja el segundo vikingo en la posición asignada
         public void DibujarVikingo2()
         {
+            // Guardar el color original
+            ConsoleColor colorOriginal = Console.ForegroundColor;
+
+            // Cambiar el color a rojo
+            Console.ForegroundColor = ConsoleColor.Red;
+
+            // Dibujar el segundo vikingo en la posición asignada
             Console.SetCursorPosition(posicion2X, posicion2Y);
             Console.WriteLine(" (•_• ) ");
             Console.SetCursorPosition(posicion2X, posicion2Y + 1);
             Console.WriteLine(" ୧( ୧ ) ");
             Console.SetCursorPosition(posicion2X, posicion2Y + 2);
             Console.WriteLine("   /︶\\ ");
+
+            // Restaurar el color original
+            Console.ForegroundColor = colorOriginal;
         }
+
 
 
         // Dibuja la información de los personajes en la parte superior de la consola

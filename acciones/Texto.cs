@@ -7,16 +7,29 @@ namespace Texto
     {
         public static void MostrarMenu()
         {
+            
 
+            // Cambiar el color del texto a azul
+            Console.ForegroundColor = ConsoleColor.Blue;
+
+            // Mostrar el menú con animación
             Console.WriteLine("\nMENU PRINCIPAL:");
             Animado(15, "1. Jugar\n");
             Animado(15, "2. Ver historial de ganadores\n");
             Animado(15, "S. Salir\n");
             Animado(15, "\nIngrese el número de la opción deseada: ");
 
+            
         }
+
         public static void Presentacion()
         {
+            // Guardar los colores originales
+            ConsoleColor colorOriginalTexto = Console.ForegroundColor;
+            ConsoleColor colorOriginalFondo = Console.BackgroundColor;
+
+            // Colores para el texto
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("##   ##   ######  ### ###   ######  ##   ##   #####    #####    #####");
             Console.WriteLine("##   ##     ##     ## ##      ##    ###  ##  ##   ##  ### ###  ##   ##");
             Console.WriteLine("##   ##     ##     ####       ##    #### ##  ##       ##   ##  ##");
@@ -24,7 +37,15 @@ namespace Texto
             Console.WriteLine(" ## ##      ##     ####       ##    ## ####  ##   ##  ##   ##       ##");
             Console.WriteLine("  ###       ##     ## ##      ##    ##  ###  ##   ##  ### ###  ##   ##");
             Console.WriteLine("  ###     ######  ### ###   ######  ##   ##   #####    #####    #####");
+            
+            // Restaurar el color original para el siguiente texto
+            Console.ForegroundColor = colorOriginalTexto;
+            Console.BackgroundColor = ConsoleColor.Black;  // Asegúrate de que el fondo sea negro o ajusta según tu preferencia
+
             Console.WriteLine();
+            
+            // Colores para el marco de bienvenida
+            Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("       ***************************************************");
             Console.WriteLine("       *                                                 *");
             Console.WriteLine("       *          Bienvenido al juego de Vikingos        *");
@@ -40,13 +61,20 @@ namespace Texto
             Console.WriteLine("       *                                                 *");
             Console.WriteLine("       ***************************************************");
 
+            // Restaurar el color original para el mensaje final
+            Console.ForegroundColor = colorOriginalTexto;
+            
+            Console.WriteLine("Presione enter para continuar...");
+            Console.ReadLine();
         }
+
+
         public static void Dificultad()
         {
             Console.WriteLine("\nSelecciona la dificultad:");
             Console.WriteLine("1. Fácil (3 rivales)");
             Console.WriteLine("2. Medio (6 rivales)");
-            Console.WriteLine("3. Difícil (10 rivales)");
+            Console.WriteLine("3. Difícil (9 rivales)");
         }
 
         public static void Ganaste()
@@ -116,15 +144,6 @@ namespace Texto
             }
         }
 
-        public static void CentrarTexto(string texto)
-        {
-            int anchoVentana = Console.WindowWidth;
-            int longitudTexto = texto.Length;
-            int espaciadoIzquierdo = (anchoVentana - longitudTexto) / 2;
-
-            string textoCentrado = new string(' ', espaciadoIzquierdo) + texto;
-            Console.WriteLine(textoCentrado);
-        }
 
         public static async Task Chiste()
         {

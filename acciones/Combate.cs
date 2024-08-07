@@ -72,16 +72,30 @@ namespace Combate
         {
             // Calcular componentes del daño
             int ataque = atacante.Destreza * atacante.Fuerza * atacante.Nivel;
-            int efectividad = random.Next(1, 101);
+            int efectividad = random.Next(85, 116); // Modificar el rango de efectividad para variar más el daño
             int defensa = defensor.Armadura * defensor.Velocidad;
-            const int constanteAjuste = 500;
+            const int constanteAjuste = 500; // Ajustar la constante para un daño más significativo
 
             // Calcular daño
-            int danio = ((ataque * efectividad) - defensa) / constanteAjuste;
-            int danioFinal = danio*2;
-            // Asegurarse de que el daño no sea menor que 10
+            int danioBase = ((ataque * efectividad) - defensa) / constanteAjuste;
+            
+            // Introducir un rango de variabilidad en el daño
+            int danioConVariabilidad = danioBase + random.Next(-10, 11); // Daño puede variar entre -10 y +10
+
+            // Asegurarse de que el daño no sea menor que 1
+            int danioFinal = Math.Max(danioConVariabilidad, 1);
+
+            // Introducir posibilidad de golpe crítico
+            bool golpeCritico = random.Next(1, 101) <= 10; // 10% de probabilidad de golpe crítico
+            if (golpeCritico)
+            {
+                danioFinal *= 2; // Doble daño en caso de golpe crítico
+                Console.WriteLine("\n¡Golpe Crítico!"); // Imprimir mensaje en caso de golpe crítico
+            }
+
             return danioFinal;
         }
+
 
         static void MejorarPersonaje(Personaje ganador)
         {
