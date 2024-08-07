@@ -41,6 +41,13 @@ namespace Texto
             Console.WriteLine("       ***************************************************");
 
         }
+        public static void Dificultad()
+        {
+            Console.WriteLine("\nSelecciona la dificultad:");
+            Console.WriteLine("1. Fácil (3 rivales)");
+            Console.WriteLine("2. Medio (6 rivales)");
+            Console.WriteLine("3. Difícil (10 rivales)");
+        }
 
         public static void Ganaste()
         {
@@ -85,7 +92,7 @@ namespace Texto
 
         public static void Pelea(string nombre1, string nombre2)
         {
-           Console.WriteLine($@"
+            Console.WriteLine($@"
 {nombre1}: {nombre2} te voy a derrotar!
 
    ( •_•)                (•_• ) 
@@ -94,8 +101,8 @@ namespace Texto
 
 ");
 
-        
-            
+
+
         }
 
 
@@ -107,6 +114,16 @@ namespace Texto
                 Console.Write(texto[i]);
                 Thread.Sleep(vel);
             }
+        }
+
+        public static void CentrarTexto(string texto)
+        {
+            int anchoVentana = Console.WindowWidth;
+            int longitudTexto = texto.Length;
+            int espaciadoIzquierdo = (anchoVentana - longitudTexto) / 2;
+
+            string textoCentrado = new string(' ', espaciadoIzquierdo) + texto;
+            Console.WriteLine(textoCentrado);
         }
 
         public static async Task Chiste()
